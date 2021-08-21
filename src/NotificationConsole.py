@@ -1,12 +1,17 @@
+# system notification
 import platform
 import os
 from plyer import notification
+
+# telegram notification
 from urllib.parse import quote_plus
 import requests
 
-from src.static import Keys
+# email notification
+import smtplib
+import ssl
 
-# TODO: aggiungere notifiche via email
+from src.static import Keys
 
 
 def sendTelegramNotification(found_message, title=None):
@@ -46,11 +51,32 @@ def sendOSNotification(title, found_message):
     :param title: the title of notification
     :param found_message: the message of notification
     """
-    notification.notify(
+    notification.sendMacOSNotification(
         title=title,
         message=found_message,
         app_name="General Scraper",
     )
+
+
+def sendEMailNotification(emailAddress, found_message):
+    """
+    Sends a notification via E-Mail.
+    :param emailAddress: the receiver email address where the notification will be sent.
+    :param found_message: the email message (subject and body).
+
+    For more, see: https://realpython.com/python-send-email/
+    """
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = Keys.sendEmailAddress  # Enter your address
+    receiver_email = emailAddress  # Enter receiver address
+    password = Keys.sendEmailPassword
+    message = found_message
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
 
 
 def sendWindowsNotification(title, found_message):
@@ -67,7 +93,7 @@ def sendWindowsNotification(title, found_message):
         toaster.show_toast(title, found_message)
 
 
-def notify(title, found_message):
+def sendMacOSNotification(title, found_message):
     """
     Sends as MacOS system notification.
     :param title: the title of notification
@@ -78,4 +104,4 @@ def notify(title, found_message):
                   osascript -e 'display notification "{}" with title "{}"'
                   """.format(found_message, title))
 
-    notify("Title", found_message)
+    sendMacOSNotification("Title", found_message)

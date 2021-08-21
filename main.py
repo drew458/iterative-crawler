@@ -1,4 +1,4 @@
-from src import IOConsole, ScraperMode
+from src import IOConsole, ScraperMode, UserInputConfiguration
 
 """ The script scrapes the page inserted as user input URL, looking for the text inserted as user input.
     Then it can either send notification if text is found on the page, or waiting and keep refreshing until the text
@@ -11,22 +11,13 @@ def main():
 
     IOConsole.printStartMessage()
 
-    # set the url
-    url = IOConsole.inputUrl()
-
-    # keywords to look for
-    inputText = IOConsole.inputKeywords()
-
-    # time from one check to another
-    waitTime = IOConsole.inputTimeToSleep()
-
-    mode = IOConsole.scraperMode()
+    url, inputText, waitTime, mode, emailAddress = UserInputConfiguration.programStart()
 
     if int(mode) == 1:
-        ScraperMode.mode1(url, inputText, waitTime)
+        ScraperMode.mode1(url, inputText, waitTime, emailAddress)
 
     if int(mode) == 2:
-        ScraperMode.mode2(url, inputText, waitTime)
+        ScraperMode.mode2(url, inputText, waitTime, emailAddress)
 
 
 if __name__ == "__main__":

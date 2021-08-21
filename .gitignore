@@ -3,4 +3,4 @@ src/static/Keys.py
 __pycache__
 .idea
 src/static/Keys.py
-ghostdriver.log
+src/web_drivers/ghostdriver.log

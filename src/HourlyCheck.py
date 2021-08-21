@@ -19,13 +19,13 @@ def job():
     texth3 = 'Le tue console preferite torneranno disponibili nelle prossime settimane su questo sito.'
 
     if not CheckKeywords.check(strings_h1, texth1) is True:
-        print(IOConsole.getFoundTitle())
+        print(IOConsole.getSystemFoundTitle())
 
         # Windows notification
         # swn.sendNotification()
 
         # Telegram bot notification
-        NotificationConsole.sendTelegramNotification(IOConsole.getFoundTitle())
+        NotificationConsole.sendTelegramNotification(IOConsole.getSystemFoundTitle())
     else:
         print("Hourly check of " + datetime.datetime.now().strftime("%H") + ":" + datetime.datetime.now().strftime("%M")
               + ":" + datetime.datetime.now().strftime("%S") + ", nothing found...")

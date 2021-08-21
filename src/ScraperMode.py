@@ -30,18 +30,22 @@ def pageScrapingAndStats(url):
     return scrapedPage, start_scrape, finish_scrape, start_conditional_statement
 
 
-def sendAllNotifications():
+def sendAllNotifications(emailAddress):
     """
-    Sends the notification on all the platforms
+    Sends the notification on all the platforms.
+    :param emailAddress: the receiver email address where the notification will be sent
     """
     # To enable Windows notifications, uncomment the line below
     # swn.sendNotification()
 
     # Telegram bot notification
-    NotificationConsole.sendTelegramNotification(IOConsole.getFoundMessageTelegram())
+    NotificationConsole.sendTelegramNotification(IOConsole.getTelegramFoundMessage())
 
     # OS notification
-    NotificationConsole.sendOSNotification(IOConsole.getFoundTitle(), IOConsole.getFoundMessage())
+    NotificationConsole.sendOSNotification(IOConsole.getSystemFoundTitle(), IOConsole.getSystemFoundMessage())
+
+    # E-Mail notification
+    NotificationConsole.sendEMailNotification(emailAddress, IOConsole.getEmailFoundMessage())
 
 
 def KeepSearching(count, days, weeks, start_scrape, finish_scrape, start_conditional_statement, waitTime):
@@ -79,22 +83,24 @@ def KeepSearching(count, days, weeks, start_scrape, finish_scrape, start_conditi
     return count
 
 
-def ObjectFound():
+def ObjectFound(emailAddress):
     """
     Chunk to code to be executed when the keywords are found in the website.
+    :param emailAddress: the receiver email address where the notification will be sent
     """
     IOConsole.printFoundMessage()
 
-    sendAllNotifications()
+    sendAllNotifications(emailAddress)
 
 
-def mode1(url, inputText, waitTime):
+def mode1(url, inputText, waitTime, emailAddress):
     """
     Runs the scraper in Mode 1. That means, when the user-inserted string is found on the website it sends notification;
     if the string isn't found, continues to search.
     :param url: the url of the website.
     :param inputText: the text to look for on the website.
     :param waitTime: the time to wait between one check and another.
+    :param emailAddress: the receiver email address where the notification will be sent
     """
     count = 0
     days = 0
@@ -110,7 +116,7 @@ def mode1(url, inputText, waitTime):
 
         # if the keywords are in the page... object found!
         if CheckKeywords.checkJS(scrapedPage, inputText) is True:
-            ObjectFound()
+            ObjectFound(emailAddress)
 
             # Adiòs
             break
@@ -123,13 +129,14 @@ def mode1(url, inputText, waitTime):
             continue
 
 
-def mode2(url, inputText, waitTime):
+def mode2(url, inputText, waitTime, emailAddress):
     """
     Runs the scraper in Mode 2. That means, when the user-inserted text is on the website, continues to search.
     If the text isn't found, it sends notifications and stops.
     :param url: the url of the website.
     :param inputText: the text to look for on the website.
     :param waitTime: the time to wait between one check and another.
+    :param emailAddress: the receiver email address where the notification will be sent
     """
     count = 0
     days = 0
@@ -153,9 +160,7 @@ def mode2(url, inputText, waitTime):
 
         # but if the words above don't occur in the page... object found!
         else:
-            IOConsole.printStartMessage()
-
-            sendAllNotifications()
+            ObjectFound(emailAddress)
 
             # Adiòs
             break

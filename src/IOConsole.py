@@ -1,9 +1,16 @@
-START_MESSAGE = "HI! This is a general scraper.\n" \
+import getpass
+
+START_MESSAGE = "HI! This is the Iterative Scraper.\n" \
                 "It can work in two ways: send notification if text is found on the page, or waiting and keep refreshing until the text " \
                 "goes away from the page."
 FOUND_TITLE = "FOUND IT!"
 FOUND_MESSAGE = "The situation on the website you are monitoring has changed. Please go check it out."
 FOUND_MESSAGE_TELEGRAM = "FOUND IT! The situation on the website you are monitoring has changed. Please go check it out."
+EMAIL_FOUND_MESSAGE = """\
+    Subject: Object found!
+
+    This email was sent from the Iterative Scraper that you started.\n
+    The object that you inserted has been found!"""
 
 
 def inputUrl():
@@ -52,6 +59,12 @@ def scraperMode():
     return mode
 
 
+def inputReceiverEmailAddress():
+    emailAddress = input("Insert the email address where you'd like to receive the email notifications: ")
+
+    return emailAddress
+
+
 def printStartMessage():
     print(START_MESSAGE)
     print()
@@ -69,13 +82,17 @@ def printWaitingStatsMessage():
     print("While waiting, let's see some stats about the execution...")
 
 
-def getFoundTitle():
+def getSystemFoundTitle():
     return FOUND_TITLE
 
 
-def getFoundMessage():
+def getSystemFoundMessage():
     return FOUND_MESSAGE
 
 
-def getFoundMessageTelegram():
+def getTelegramFoundMessage():
     return FOUND_MESSAGE_TELEGRAM
+
+
+def getEmailFoundMessage():
+    return EMAIL_FOUND_MESSAGE
