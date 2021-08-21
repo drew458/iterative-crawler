@@ -1,8 +1,9 @@
-from src import IOConsole, scraperModes
+from src import IOConsole, ScraperModes
 
-""" This is a really simple script. The script downloads the page of MediaWorld where the PS5 Digital Edition 
-    will be added when available, and if found, notifies via Telegram bot.
-    If nothing is found it repeats after 10 minutes.
+""" The script scrapes the page inserted as user input, looking for the text inserted as user input.
+    Then it can either send notification if text is found on the page, or waiting and keep refreshing until the text
+    goes away from the page. The mode choice is inserted as user input. 
+    When triggered, it can send notification via screen, OS, Telegram. 
 """
 
 
@@ -26,10 +27,10 @@ def main():
     mode = IOConsole.scraperMode()
 
     if int(mode) == 1:
-        scraperModes.mode1(url, inputText, waitTime)
+        ScraperModes.mode1(url, inputText, waitTime)
 
     if int(mode) == 2:
-        scraperModes.mode2(url, inputText, waitTime)
+        ScraperModes.mode2(url, inputText, waitTime)
 
 
 if __name__ == "__main__":

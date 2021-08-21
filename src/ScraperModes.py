@@ -1,6 +1,6 @@
 from threading import Thread
 
-from src import Stats, TimeElapsed, SendTelegramBotNotification as stbn, Scraper, CheckKeywords, HourlyCheck, IOConsole
+from src import Stats, TimeElapsed, NotificationConsole, Scraper, CheckKeywords, HourlyCheck, IOConsole
 
 
 def mode1(url, inputText, waitTime):
@@ -47,7 +47,10 @@ def mode1(url, inputText, waitTime):
             # swn.sendNotification()
 
             # Telegram bot notification
-            stbn.sendNotification(IOConsole.getFoundMessage())
+            NotificationConsole.sendTelegramNotification(IOConsole.getFoundMessageTelegram())
+
+            # OS notification
+            NotificationConsole.sendOSNotification(IOConsole.getFoundTitle(), IOConsole.getFoundMessage())
 
             # Adiòs
             break
@@ -143,7 +146,10 @@ def mode2(url, inputText, waitTime):
             # swn.sendNotification()
 
             # Telegram bot notification
-            stbn.sendNotification(IOConsole.getFoundMessage())
+            NotificationConsole.sendTelegramNotification(IOConsole.getFoundTitle(), IOConsole.getFoundMessage())
+
+            # OS notification
+            NotificationConsole.sendOSNotification(IOConsole.getFoundTitle(), IOConsole.getFoundMessage())
 
             # Adiòs
             break

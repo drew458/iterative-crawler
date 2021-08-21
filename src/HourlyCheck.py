@@ -1,7 +1,7 @@
 import schedule
 import datetime
 import time
-from src import Scraper, CheckKeywords, SendTelegramBotNotification, IOConsole
+from src import Scraper, CheckKeywords, NotificationConsole, IOConsole
 
 
 def job():
@@ -19,13 +19,13 @@ def job():
     texth3 = 'Le tue console preferite torneranno disponibili nelle prossime settimane su questo sito.'
 
     if not CheckKeywords.check(strings_h1, texth1) is True:
-        print(IOConsole.getFoundMessage())
+        print(IOConsole.getFoundTitle())
 
         # Windows notification
         # swn.sendNotification()
 
         # Telegram bot notification
-        SendTelegramBotNotification.sendNotification(IOConsole.getFoundMessage())
+        NotificationConsole.sendTelegramNotification(IOConsole.getFoundTitle())
     else:
         print("Hourly check of " + datetime.datetime.now().strftime("%H") + ":" + datetime.datetime.now().strftime("%M")
               + ":" + datetime.datetime.now().strftime("%S") + ", nothing found...")

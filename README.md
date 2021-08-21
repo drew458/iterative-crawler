@@ -8,7 +8,8 @@ The script is compatible with Python 3.x versions.
 ## Configuration
 
 Before starting the script, you need to install the following external modules through CLI (Windows/Linux/Mac):
-* `pip3 install requests` (HTTP(S) requests)
+* `pip3 install requests`
+* `pip3 install schedule`
 
 More briefly, just run:
 * `pip3 install -r requirements.txt`
@@ -18,9 +19,12 @@ To run the script, `cd` into the folder and `python3 main.py`.
 ## Notifications
 
 Various types of notifications are available and ready to use:
-* On screen notifications.
-* Windows system notifications (you just need to uncomment one line of code).
-* Telegram bot notifications (change where your bot `token` and `chat_id` are stored; if you're thinking to deploy it on Heroku, see below).
+* #### On screen notifications.
+* #### Windows system notifications 
+    You just need to uncomment one line of code.
+* #### Telegram bot notifications
+  You can either set `TOKEN` and `CHAT_ID` as environment variables or create a file `Keys.py` with those variables.  
+  If you're thinking to deploy it on Heroku, see below.
 
 ## Usage & Features
 

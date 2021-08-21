@@ -1,10 +1,7 @@
-FOUND_MESSAGE = "FOUND IT!"
-START_MESSAGE = "HI! I'm a scraper"
-
-
-def printStartMessage():
-    print(START_MESSAGE)
-    print()
+START_MESSAGE = "HI! I'm a general scraper"
+FOUND_TITLE = "FOUND IT!"
+FOUND_MESSAGE = "The situation on the website you are monitoring has changed. Please go check it out."
+FOUND_MESSAGE_TELEGRAM = "FOUND IT! The situation on the website you are monitoring has changed. Please go check it out."
 
 
 def inputUrl():
@@ -38,6 +35,12 @@ def inputTimeToSleep():
 
 
 def scraperMode():
+    """
+        The operating mode of the scraper.
+        It can either send notification if text is found on the page, or waiting and keep refreshing
+        until the text goes away from the page.
+        :return: the mode
+        """
     print("In which mode should the scraper behave?\nInsert the correspondant number...")
     print("1. Send a notification when the text inserted is found in the webiste")
     print("2. Send a notification when the text inserted isn't there anymore")
@@ -46,8 +49,13 @@ def scraperMode():
     return mode
 
 
+def printStartMessage():
+    print(START_MESSAGE)
+    print()
+
+
 def printFoundMessage():
-    print(FOUND_MESSAGE)
+    print(FOUND_TITLE)
 
 
 def printCheckNumberMessage(count):
@@ -58,5 +66,13 @@ def printWaitingStatsMessage():
     print("While waiting, let's see some stats about the execution...")
 
 
+def getFoundTitle():
+    return FOUND_TITLE
+
+
 def getFoundMessage():
     return FOUND_MESSAGE
+
+
+def getFoundMessageTelegram():
+    return FOUND_MESSAGE_TELEGRAM

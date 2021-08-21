@@ -1,6 +1,7 @@
 import time
 
-from src import SendTelegramBotNotification
+from src import NotificationConsole, IOConsole
+
 
 def performanceCounter():
     return time.perf_counter()
@@ -31,8 +32,8 @@ def daysCounter(day, weeks):
 def weeksCounter(week):
     if week == 1:
         MESSAGE = "Guten Tag. One week is gone since I started looking at the website, nothing found so far..."
-        SendTelegramBotNotification.sendNotification(MESSAGE)
+        NotificationConsole.sendTelegramNotification(MESSAGE)
     else:
         MESSAGE = (
             "Guten Tag. ", week, " weeks are gone since I started looking at the website, nothing found so far...")
-        SendTelegramBotNotification.sendNotification(MESSAGE)
+        NotificationConsole.sendTelegramNotification(MESSAGE)
