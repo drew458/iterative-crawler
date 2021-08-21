@@ -26,7 +26,7 @@ def daysCounter(day, weeks):
     if day == 1:
         print("* 1 day is gone since I started looking at the website...")
     else:
-        print("* ", day, " days are gone since I started looking at the webiste...")
+        print("* ", day, " days are gone since I started looking at the website...")
 
 
 def weeksCounter(week):

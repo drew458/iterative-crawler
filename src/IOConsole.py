@@ -1,4 +1,6 @@
-START_MESSAGE = "HI! I'm a general scraper"
+START_MESSAGE = "HI! This is a general scraper.\n" \
+                "It can work in two ways: send notification if text is found on the page, or waiting and keep refreshing until the text " \
+                "goes away from the page."
 FOUND_TITLE = "FOUND IT!"
 FOUND_MESSAGE = "The situation on the website you are monitoring has changed. Please go check it out."
 FOUND_MESSAGE_TELEGRAM = "FOUND IT! The situation on the website you are monitoring has changed. Please go check it out."
@@ -9,8 +11,9 @@ def inputUrl():
     Sets the URL
     :return: the URL
     """
-    url = input("Please insert the website URL where you want to scrape...\n")
+    url = input("Please insert the website URL to scrape...\n")
     print()
+
     return url
 
 
@@ -41,9 +44,9 @@ def scraperMode():
         until the text goes away from the page.
         :return: the mode
         """
-    print("In which mode should the scraper behave?\nInsert the correspondant number...")
-    print("1. Send a notification when the text inserted is found in the webiste")
-    print("2. Send a notification when the text inserted isn't there anymore")
+    print("In which mode should the scraper behave?\nInsert the corresponding number...")
+    print("1. Send a notification when the text inserted is found in the website")
+    print("2. Send a notification when the text inserted isn't on the website anymore")
     mode = input()
 
     return mode

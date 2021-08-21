@@ -1,14 +1,10 @@
-from src import IOConsole, ScraperModes
+from src import IOConsole, ScraperMode
 
-""" The script scrapes the page inserted as user input, looking for the text inserted as user input.
+""" The script scrapes the page inserted as user input URL, looking for the text inserted as user input.
     Then it can either send notification if text is found on the page, or waiting and keep refreshing until the text
     goes away from the page. The mode choice is inserted as user input. 
     When triggered, it can send notification via screen, OS, Telegram. 
 """
-
-
-# To enable Windows notifications, uncomment line below
-# import sendWindowsNotification as swn
 
 
 def main():
@@ -27,10 +23,10 @@ def main():
     mode = IOConsole.scraperMode()
 
     if int(mode) == 1:
-        ScraperModes.mode1(url, inputText, waitTime)
+        ScraperMode.mode1(url, inputText, waitTime)
 
     if int(mode) == 2:
-        ScraperModes.mode2(url, inputText, waitTime)
+        ScraperMode.mode2(url, inputText, waitTime)
 
 
 if __name__ == "__main__":

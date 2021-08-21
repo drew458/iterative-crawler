@@ -6,6 +6,8 @@ import requests
 
 from src.static import Keys
 
+# TODO: aggiungere notifiche via email
+
 
 def sendTelegramNotification(found_message, title=None):
     """
