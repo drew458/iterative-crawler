@@ -1,11 +1,8 @@
-import getpass
-
 START_MESSAGE = "HI! This is the Iterative Scraper.\n" \
                 "It can work in two ways: send notification if text is found on the page, or waiting and keep refreshing until the text " \
                 "goes away from the page."
 FOUND_TITLE = "FOUND IT!"
 FOUND_MESSAGE = "The situation on the website you are monitoring has changed. Please go check it out."
-FOUND_MESSAGE_TELEGRAM = "FOUND IT! The situation on the website you are monitoring has changed. Please go check it out."
 EMAIL_FOUND_MESSAGE = """\
     Subject: Object found!
 
@@ -55,6 +52,7 @@ def scraperMode():
     print("1. Send a notification when the text inserted is found in the website")
     print("2. Send a notification when the text inserted isn't on the website anymore")
     mode = input()
+    print()
 
     return mode
 
@@ -90,7 +88,9 @@ def getSystemFoundMessage():
     return FOUND_MESSAGE
 
 
-def getTelegramFoundMessage():
+def getTelegramFoundMessage(websiteUrl):
+    FOUND_MESSAGE_TELEGRAM = "FOUND IT! The situation on the website you are monitoring has changed. " \
+                             "Please go check it out at %s." % websiteUrl
     return FOUND_MESSAGE_TELEGRAM
 
 

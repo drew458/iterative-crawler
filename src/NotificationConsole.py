@@ -51,13 +51,14 @@ def sendOSNotification(title, found_message):
     :param title: the title of notification
     :param found_message: the message of notification
     """
-    notification.sendMacOSNotification(
+    notification.notify(
         title=title,
         message=found_message,
         app_name="General Scraper",
     )
 
 
+# TODO: not working - TimeoutError: [WinError 10060]
 def sendEMailNotification(emailAddress, found_message):
     """
     Sends a notification via E-Mail.
@@ -67,7 +68,7 @@ def sendEMailNotification(emailAddress, found_message):
     For more, see: https://realpython.com/python-send-email/
     """
     port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
+    smtp_server = "smtp.gmailmail.com"
     sender_email = Keys.sendEmailAddress  # Enter your address
     receiver_email = emailAddress  # Enter receiver address
     password = Keys.sendEmailPassword

@@ -3,16 +3,16 @@ import datetime
 import time
 from src import Scraper, CheckKeywords, NotificationConsole, IOConsole
 
-
-def job():
+# TODO: REFACTOR. non tiene conto della modalità di scraping scelta dall'utente
+def job(url, inputText):
     """
     Scrapes the page, checks if the string inseide the tags is present and then sends a notification.
     """
     # Scrape the page
-    scraped_page = Scraper.scrapeThePage()
+    scraped_page = Scraper.scrapeThePage_JSSupport(url)
 
     # Find the H1 tags
-    strings_h1 = Scraper.retainStrings(scraped_page)
+    strings_h1 = Scraper.retainStrings(scraped_page, inputText)
 
     # Keywords
     texth1 = 'Le console sono in arrivo. Continua a seguirci per scoprire quando la vendita sarà aperta.'
@@ -32,45 +32,45 @@ def job():
         print()
 
 
-def everyHourCheck_15SecsDelay():
+def everyHourCheck_15SecsDelay(url, inputText):
     """
     Does the complete job of scraping and sending a notification, every hour and 15 secs.
     """
-    schedule.every().day.at("00:00:15").do(job)
-    schedule.every().day.at("01:00:15").do(job)
-    schedule.every().day.at("02:00:15").do(job)
-    schedule.every().day.at("03:00:15").do(job)
-    schedule.every().day.at("04:00:15").do(job)
-    schedule.every().day.at("05:00:15").do(job)
-    schedule.every().day.at("06:00:15").do(job)
-    schedule.every().day.at("07:00:15").do(job)
-    schedule.every().day.at("08:00:15").do(job)
-    schedule.every().day.at("09:00:15").do(job)
-    schedule.every().day.at("10:00:15").do(job)
-    schedule.every().day.at("11:00:15").do(job)
-    schedule.every().day.at("12:00:15").do(job)
-    schedule.every().day.at("13:00:15").do(job)
-    schedule.every().day.at("14:00:15").do(job)
-    schedule.every().day.at("15:00:15").do(job)
-    schedule.every().day.at("16:00:15").do(job)
-    schedule.every().day.at("17:00:15").do(job)
-    schedule.every().day.at("18:00:15").do(job)
-    schedule.every().day.at("19:00:15").do(job)
-    schedule.every().day.at("20:00:15").do(job)
-    schedule.every().day.at("21:00:15").do(job)
-    schedule.every().day.at("22:00:15").do(job)
-    schedule.every().day.at("23:00:15").do(job)
+    schedule.every().day.at("00:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("01:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("02:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("03:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("04:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("05:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("06:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("07:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("08:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("09:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("10:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("11:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("12:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("13:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("14:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("15:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("16:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("17:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("18:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("19:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("20:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("21:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("22:00:15").do(job, url=url, inputText=inputText)
+    schedule.every().day.at("23:00:15").do(job, url=url, inputText=inputText)
 
     while True:
         schedule.run_pending()
         time.sleep(1)
 
 
-def everyHourCheck_OneMinuteDelay():
+def everyHourCheck_OneMinuteDelay(url, inputText):
     """
     Does the complete job of scraping and sending a notification, every hour and a minute.
     """
-    schedule.every().hour.at(":01").do(job)
+    schedule.every().hour.at(":01").do(job, url=url, inputText=inputText)
 
     while True:
         schedule.run_pending()

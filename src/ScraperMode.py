@@ -30,16 +30,17 @@ def pageScrapingAndStats(url):
     return scrapedPage, start_scrape, finish_scrape, start_conditional_statement
 
 
-def sendAllNotifications(emailAddress):
+def sendAllNotifications(emailAddress, websiteUrl):
     """
     Sends the notification on all the platforms.
     :param emailAddress: the receiver email address where the notification will be sent
+    :param websiteUrl: the url of the website
     """
     # To enable Windows notifications, uncomment the line below
     # swn.sendNotification()
 
     # Telegram bot notification
-    NotificationConsole.sendTelegramNotification(IOConsole.getTelegramFoundMessage())
+    NotificationConsole.sendTelegramNotification(IOConsole.getTelegramFoundMessage(websiteUrl))
 
     # OS notification
     NotificationConsole.sendOSNotification(IOConsole.getSystemFoundTitle(), IOConsole.getSystemFoundMessage())
@@ -83,14 +84,15 @@ def KeepSearching(count, days, weeks, start_scrape, finish_scrape, start_conditi
     return count
 
 
-def ObjectFound(emailAddress):
+def ObjectFound(emailAddress, websiteUrl):
     """
     Chunk to code to be executed when the keywords are found in the website.
     :param emailAddress: the receiver email address where the notification will be sent
+    :param websiteUrl: the url of the website
     """
     IOConsole.printFoundMessage()
 
-    sendAllNotifications(emailAddress)
+    sendAllNotifications(emailAddress, websiteUrl)
 
 
 def mode1(url, inputText, waitTime, emailAddress):
@@ -107,7 +109,8 @@ def mode1(url, inputText, waitTime, emailAddress):
     weeks = 0
 
     # start the hourly check thread
-    Threads.startThreads()
+    # TODO: sistemare HourlyCheck
+    #Threads.startThreads(url, inputText)
 
     # while this is true (it is true by default)
     while True:
@@ -116,7 +119,7 @@ def mode1(url, inputText, waitTime, emailAddress):
 
         # if the keywords are in the page... object found!
         if CheckKeywords.checkJS(scrapedPage, inputText) is True:
-            ObjectFound(emailAddress)
+            ObjectFound(emailAddress, url)
 
             # Adiòs
             break
@@ -143,7 +146,8 @@ def mode2(url, inputText, waitTime, emailAddress):
     weeks = 0
 
     # start the hourly check thread
-    Threads.startThreads()
+    # TODO: sistemare HourlyCheck
+    #Threads.startThreads(url, inputText)
 
     # while this is true (it is true by default)
     while True:
@@ -160,7 +164,7 @@ def mode2(url, inputText, waitTime, emailAddress):
 
         # but if the words above don't occur in the page... object found!
         else:
-            ObjectFound(emailAddress)
+            ObjectFound(emailAddress, url)
 
             # Adiòs
             break

@@ -1,6 +1,6 @@
 import time
 
-from src import NotificationConsole, IOConsole
+from src import NotificationConsole
 
 
 def performanceCounter():

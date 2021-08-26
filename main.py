@@ -1,3 +1,5 @@
+import sys
+
 from src import IOConsole, ScraperMode, UserInputConfiguration
 
 """ The script scrapes the page inserted as user input URL, looking for the text inserted as user input.
@@ -18,6 +20,8 @@ def main():
 
     if int(mode) == 2:
         ScraperMode.mode2(url, inputText, waitTime, emailAddress)
+
+    sys.exit()
 
 
 if __name__ == "__main__":

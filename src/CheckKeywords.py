@@ -26,15 +26,22 @@ def check(scrapedPage, inputText):
     # return False
 
 
-# TODO: non funziona, il testo cercato non viene trovato all'interno delle liste fatte degli elementi della pagina
+# TODO: funziona si potrebbe rendere la ricerca più mirata
 def checkJS(scrapedPage, inputText):
     """Checks if the input text is present in the whole page.
-
-            :param scrapedPage: the HTML string of the page scraped.
-            :param inputText: the string to look for inside the tags.
-            :return: True if the text is present in the page, False otherwise
-            :rtype: Boolean
+    :param scrapedPage: the HTML string of the page scraped.
+    :param inputText: the string to look for inside the tags.
+    :return: True if the text is present in the page, False otherwise
+    :rtype: Boolean
     """
+
+    # find plain text in the page source HTML converted in string
+    eh = scrapedPage.page_source.find(inputText)
+
+    if eh != -1:
+        return True
+
+    # find string inside the h* , p and a tags in the HTML
     h1Text = scrapedPage.find_elements_by_tag_name('h1')
     h2Text = scrapedPage.find_elements_by_tag_name('h2')
     h3Text = scrapedPage.find_elements_by_tag_name('h3')
@@ -56,6 +63,12 @@ def checkJS(scrapedPage, inputText):
     if inputText in pText:
         return True
     if inputText in aText:
+        return True
+
+    # find string inside all the elements of the HTML
+    e = scrapedPage.find_elements_by_xpath("//*[text()='" + inputText + "']")
+
+    if not e:
         return True
 
     return False
