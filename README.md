@@ -16,10 +16,10 @@ To run the script, `cd` into the folder and `python3 main.py`.
 ## Notifications
 
 Various types of notifications are available and ready to use:
-* ### On screen notifications.
-* ### System notifications 
+* **On screen notifications**
+* **System notifications**   
     No matter your operating system, there's built-in support for native notifications.
-* ### Telegram bot notifications
+* **Telegram bot notifications**  
   You can either set `TOKEN` and `CHAT_ID` as environment variables or create a file `Keys.py` with those variables.  
   If you're thinking to deploy it on Heroku, see below.
 
